@@ -42,11 +42,11 @@
 			exit &end;
 		}
 		else{
-			if($msg eq "HELO text\n")
+			if(substr($msg,0,4) eq "HELO")
 			{
 				my $address = $thread_socket->sockhost;
 				print "client said $msg";
-				print($thread_socket "HELO text\nIP:$address\nPort: $port\nStudentID: 10366921");
+				print($thread_socket "$msg \nIP:$address\nPort: $port\nStudentID: 10366921");
 				close($thread_socket);
 			}
 			else
