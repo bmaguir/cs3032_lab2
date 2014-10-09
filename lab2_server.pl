@@ -1,8 +1,8 @@
  use Thread;
  use IO::Socket;
+
  {
- 
-	my $port = '2000';
+	my $port = $ARGV[0];
 	$socket = IO::Socket::INET->new(
 		LocalHost => 'localhost',
 		LocalPort => $port,
@@ -44,8 +44,9 @@
 		else{
 			if($msg eq "HELO text\n")
 			{
+				my $address = $thread_socket->sockhost;
 				print "client said $msg";
-				print($thread_socket "HELO text\nIP:[ip address]\nPort: $port\nStudentID: 10366921");
+				print($thread_socket "HELO text\nIP:$address\nPort: $port\nStudentID: 10366921");
 				close($thread_socket);
 			}
 			else
@@ -61,9 +62,11 @@
 		print "closing socket\n";
 		close($socket);
 		#close socket and clean up all used threads
-		@thr = my @thr;
 		foreach(@thr){
-		$_->join;
+		if($_->is_joinable())
+			{
+			$_->detach();
+			}
 		}
 	}
 }

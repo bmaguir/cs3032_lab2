@@ -1,0 +1,1 @@
+perl lab2_server.pl $1
