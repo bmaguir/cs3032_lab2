@@ -10,8 +10,8 @@ while(true){
 	}
 	
 	my $socket = IO::Socket::INET->new(
-		PeerAddr =>'localhost',
-		PeerPort => '2000',
+		PeerAddr =>'macneill.scss.tcd.ie',
+		PeerPort => '1962',
 		Proto => 'tcp'
 	) or die("Error :: $!");
 
